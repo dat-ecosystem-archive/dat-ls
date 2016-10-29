@@ -31,6 +31,13 @@ Dat contains 6 changes
 Total content size: 3.05 kB
 ```
 
+Per default it'll exit after reading the first snapshot of the change feed.
+To keep listening for changes use the `--live` flag
+
+```
+> dat-ls 8a1b6864f290a1204a3fe048ced34865a24f5fdef4ce3753bab613f66636587d --live
+```
+
 ## License
 
 MIT
