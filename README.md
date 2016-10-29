@@ -6,6 +6,8 @@ Small program that lists all the changes in a dat
 npm install -g dat-ls
 ```
 
+[![build status](http://img.shields.io/travis/mafintosh/dat-ls.svg?style=flat)](http://travis-ci.org/mafintosh/dat-ls)
+
 ## Usage
 
 ```
