@@ -7,7 +7,7 @@ var prettyBytes = require('pretty-bytes')
 var memdb = require('memdb')
 
 var key = process.argv[2]
-var live = process.argv.indexOf('--live') > -1 || process.argv.index('-l') > -1
+var live = process.argv.indexOf('--live') > -1 || process.argv.indexOf('-l') > -1
 
 if (!key) {
   console.error('Usage: dat-ls [key]')
