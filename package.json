@@ -12,7 +12,12 @@
     "hyperdrive-encoding": "^2.0.1",
     "pretty-bytes": "^4.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^8.5.0"
+  },
+  "scripts": {
+    "test": "standard"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mafintosh/dat-ls.git"
