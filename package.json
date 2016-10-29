@@ -1,0 +1,26 @@
+{
+  "name": "dat-ls",
+  "version": "0.0.0",
+  "description": "Small program that lists all the changes in a dat",
+  "main": "index.js",
+  "bin": {
+    "dat-ls": "./index.js"
+  },
+  "dependencies": {
+    "hypercore": "^4.11.0",
+    "hyperdrive-archive-swarm": "^4.1.6",
+    "hyperdrive-encoding": "^2.0.1",
+    "pretty-bytes": "^4.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/dat-ls.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/dat-ls/issues"
+  },
+  "homepage": "https://github.com/mafintosh/dat-ls"
+}
