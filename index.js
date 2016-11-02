@@ -38,7 +38,7 @@ rs.on('data', function (data) {
 
   switch (data.type) {
     case 'index': return console.log('[index] content --> %s', data.content ? data.content.toString('hex') : '(nil)')
-    case 'file': return console.log('[file]  %s (%s, %s blocks)', data.name, prettyBytes(data.length), data.blocks)
+    case 'file': return console.log('[file]  %s (%s, %s %s)', data.name, prettyBytes(data.length), data.blocks, data.blocks === 1 ? 'block' : 'blocks')
     case 'directory': return console.log('[dir]   %s', data.name || '(empty)')
   }
 
