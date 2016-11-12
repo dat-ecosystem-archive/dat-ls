@@ -47,6 +47,6 @@ rs.on('data', function (data) {
 
 rs.on('end', function () {
   console.log()
-  console.log('Total content size: %s', prettyBytes(size))
+  console.log('Total content size: %s (%s metadata)', prettyBytes(size), prettyBytes(feed.bytes))
   process.exit(0)
 })
