@@ -27,6 +27,7 @@ swarm(feed)
 var stream = ansi()
 var bar = null
 var cnt = 0
+var pad = ''
 
 var rs = feed.createReadStream({
   live: live
@@ -42,9 +43,13 @@ rs.once('data', function () {
 })
 
 function update () {
+  var first = 'Total content size: ' + prettyBytes(size)
+  if (first.length > pad.length) pad = Array(first.length + 1).join(' ')
+  first += pad.slice(first.length)
+
   stream.write(
     '[' + bar(cnt++) + ']\n\n' +
-    'Total content size: ' + prettyBytes(size) + ' GB (' + prettyBytes(feed.bytes) + ' metadata)'
+    first + ' (' + prettyBytes(feed.bytes) + ' metadata)'
   )
 }
 
