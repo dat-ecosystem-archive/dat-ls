@@ -5,9 +5,12 @@ var swarm = require('hyperdrive-archive-swarm')
 var encoding = require('hyperdrive-encoding')
 var prettyBytes = require('pretty-bytes')
 var memdb = require('memdb')
+var progress = require('progress-string')
+var ansi = require('ansi-diff-stream')
 
 var key = process.argv[2]
-var live = process.argv.indexOf('--live') > -1 || process.argv.indexOf('-l') > -1
+var summary = process.argv.indexOf('--summary') > -1 || process.argv.indexOf('-s') > -1
+var live = !summary && process.argv.indexOf('--live') > -1 || process.argv.indexOf('-l') > -1
 
 if (!key) {
   console.error('Usage: dat-ls [key]')
@@ -21,19 +24,40 @@ var feed = changes.createFeed(key)
 
 swarm(feed)
 
+var stream = ansi()
+var bar = null
+var cnt = 0
+
 var rs = feed.createReadStream({
   live: live
 })
 
 rs.once('data', function () {
   console.log('Dat contains %d changes\n', feed.blocks)
+  if (summary) {
+    bar = progress({width: 60, total: feed.blocks, style: function (a, b) { return a + '>' + b }})
+    stream.pipe(process.stdout)
+    update()
+  }
 })
+
+function update () {
+  stream.write(
+    '[' + bar(cnt++) + ']\n\n' +
+    'Total content size: ' + prettyBytes(size) + ' GB (' + prettyBytes(feed.bytes) + ' metadata)'
+  )
+}
 
 rs.on('data', function (data) {
   data = encoding.decode(data)
 
   if (data.type === 'file') {
     size += data.length
+  }
+
+  if (summary) {
+    update()
+    return
   }
 
   switch (data.type) {
@@ -46,7 +70,9 @@ rs.on('data', function (data) {
 })
 
 rs.on('end', function () {
-  console.log()
-  console.log('Total content size: %s (%s metadata)', prettyBytes(size), prettyBytes(feed.bytes))
+  if (!summary) {
+    console.log()
+    console.log('Total content size: %s (%s metadata)', prettyBytes(size), prettyBytes(feed.bytes))
+  }
   process.exit(0)
 })

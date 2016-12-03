@@ -38,6 +38,13 @@ To keep listening for changes use the `--live` flag
 > dat-ls 8a1b6864f290a1204a3fe048ced34865a24f5fdef4ce3753bab613f66636587d --live
 ```
 
+You can also have it print out a summary of the size and changes instead of the file list.
+Use the `-s` flag to do this
+
+```
+> dat-ls 8a1b6864f290a1204a3fe048ced34865a24f5fdef4ce3753bab613f66636587d -s
+```
+
 ## License
 
 MIT
