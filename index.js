@@ -28,13 +28,23 @@ var stream = ansi()
 var bar = null
 var cnt = 0
 var pad = ''
+var zeros = '000000000000'
 
 var rs = feed.createReadStream({
   live: live
 })
 
+var seq = 0
+
 rs.once('data', function () {
   console.log('Dat contains %d changes\n', feed.blocks)
+  if (!live) {
+    var digits = Math.log(feed.blocks) / Math.log(10)
+    if (digits !== Math.ceil(digits)) digits = Math.ceil(digits)
+    else digits++
+    zeros = zeros.slice(0, digits)
+  }
+
   if (summary) {
     bar = progress({width: 60, total: feed.blocks, style: function (a, b) { return a + '>' + b }})
     stream.pipe(process.stdout)
@@ -54,7 +64,10 @@ function update () {
 }
 
 rs.on('data', function (data) {
+  var s = (seq++).toString()
   data = encoding.decode(data)
+
+  s = zeros.slice(s.length) + s
 
   if (data.type === 'file') {
     size += data.length
@@ -66,12 +79,12 @@ rs.on('data', function (data) {
   }
 
   switch (data.type) {
-    case 'index': return console.log('[index] content --> %s', data.content ? data.content.toString('hex') : '(nil)')
-    case 'file': return console.log('[file]  %s (%s, %s %s)', data.name, prettyBytes(data.length), data.blocks, data.blocks === 1 ? 'block' : 'blocks')
-    case 'directory': return console.log('[dir]   %s', data.name || '(empty)')
+    case 'index': return console.log(s + ' [index] content --> %s', data.content ? data.content.toString('hex') : '(nil)')
+    case 'file': return console.log(s + ' [file]  %s (%s, %s %s)', data.name, prettyBytes(data.length), data.blocks, data.blocks === 1 ? 'block' : 'blocks')
+    case 'directory': return console.log(s + ' [dir]   %s', data.name || '(empty)')
   }
 
-  console.log('[' + data.type + ']', data)
+  console.log(s + ' [' + data.type + ']', data)
 })
 
 rs.on('end', function () {
