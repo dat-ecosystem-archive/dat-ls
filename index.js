@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var hypercore = require('hypercore')
-var swarm = require('hyperdrive-archive-swarm')
+var swarm = require('hyperdiscovery')
 var encoding = require('hyperdrive-encoding')
 var prettyBytes = require('pretty-bytes')
 var memdb = require('memdb')
