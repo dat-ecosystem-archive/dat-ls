@@ -7,11 +7,9 @@
     "dat-ls": "./index.js"
   },
   "dependencies": {
-    "ansi-diff-stream": "^1.1.1",
     "hyperdiscovery": "^6.0.1",
     "hyperdrive": "^9.2.3",
     "pretty-bytes": "^4.0.2",
-    "progress-string": "^1.2.1",
     "random-access-memory": "^2.4.0"
   },
   "devDependencies": {
