@@ -8,10 +8,8 @@
   },
   "dependencies": {
     "ansi-diff-stream": "^1.1.1",
-    "append-tree": "^2.3.2",
-    "hypercore": "^6.2.4",
     "hyperdiscovery": "^6.0.1",
-    "hyperdrive-encoding": "^2.0.1",
+    "hyperdrive": "^9.2.3",
     "pretty-bytes": "^4.0.2",
     "progress-string": "^1.2.1",
     "random-access-memory": "^2.4.0"
