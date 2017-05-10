@@ -4,12 +4,20 @@ var swarm = require('hyperdiscovery')
 var hyperdrive = require('hyperdrive')
 var prettyBytes = require('pretty-bytes')
 var ram = require('random-access-memory')
+var encoding = require('dat-encoding')
 
 var key = process.argv[2]
 var live = process.argv.indexOf('--live') > -1 || process.argv.indexOf('-l') > -1
 
 if (!key) {
   console.error('Usage: dat-ls [key]')
+  process.exit(1)
+}
+
+try {
+  key = encoding.toStr(key)
+} catch (e) {
+  console.error('Invalid Dat key')
   process.exit(1)
 }
 

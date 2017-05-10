@@ -7,6 +7,7 @@
     "dat-ls": "./index.js"
   },
   "dependencies": {
+    "dat-encoding": "^4.0.2",
     "hyperdiscovery": "^6.0.1",
     "hyperdrive": "^9.2.3",
     "pretty-bytes": "^4.0.2",
