@@ -1,6 +1,6 @@
 {
   "name": "dat-ls",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Small program that lists all the changes in a dat",
   "main": "index.js",
   "bin": {
